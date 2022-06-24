@@ -8,7 +8,9 @@ class LinearList
 public:
     LinearList() = default;
 
-    explicit LinearList(size_t count);
+    explicit LinearList(int count);
+
+    LinearList(const LinearList& other);
 
     LinearList& operator=(LinearList rhs);
 
@@ -49,8 +51,8 @@ public:
     int GetElement(int pos);
 private:
     int*    _container = nullptr;
-    size_t  _size = 0;
-    size_t  _capacity = 0;
+    unsigned int  _size = 0;
+    unsigned int  _capacity = 0;
 };
 
 // 이중 연결 리스트
@@ -58,7 +60,12 @@ class LinkedList
 {
     struct Node
     {
-        // 노드의 내용은 알아서 구현
+        Node() = default;
+
+
+        int Data = 0;
+        Node* Next = nullptr;
+        Node* Prev = nullptr;
     };
 public:
     // pos에 저장되어 있는 값을 반환합니다.
@@ -86,6 +93,10 @@ public:
 
     // value가 있다면 true, 없으면 false입니다.
     bool Find(int value);
+private:
+    Node*           _start = new Node;
+    Node*           _end;
+    unsigned int    _size = 0;
 };
 
 // 스택
