@@ -50,7 +50,7 @@ public:
     // GetElement(4);이면 -1입니다.
     int GetElement(int pos);
 private:
-    int*    _container = nullptr;
+    int*          _container = nullptr;
     unsigned int  _size = 0;
     unsigned int  _capacity = 0;
 };
@@ -60,14 +60,23 @@ class LinkedList
 {
     struct Node
     {
-        Node() = default;
+        Node(int data = NULL, Node* prev = nullptr, Node* next = nullptr);
+        Node(const Node&) = delete;
+        Node& operator=(const Node&) = delete;
+        ~Node() = default;
 
-
-        int Data = 0;
+        int   Data = NULL;
         Node* Next = nullptr;
         Node* Prev = nullptr;
     };
 public:
+    LinkedList()
+    {
+        _start->Next = _end;
+        _start->Prev = nullptr;
+        _end->Next = nullptr;
+        _end->Prev = _start;
+    }
     // pos에 저장되어 있는 값을 반환합니다.
     // 찾을 수 없는 경우 -1입니다.
     // 예시)
@@ -95,7 +104,7 @@ public:
     bool Find(int value);
 private:
     Node*           _start = new Node;
-    Node*           _end;
+    Node*           _end = new Node;
     unsigned int    _size = 0;
 };
 
